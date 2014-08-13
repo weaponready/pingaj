@@ -80,4 +80,13 @@ public class JdbcTemplateTest extends AbstractTransactionalJUnit4SpringContextTe
         System.out.println(guestDAO.loadAll().size());
     }
 
+    @Test
+    public void testNavigation(){
+        DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
+        criteria.add(Restrictions.eq("sortPath", "0,33,78,"));
+        List list = articleDAO.find(criteria);
+
+
+    }
+
 }
