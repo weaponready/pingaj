@@ -29,8 +29,13 @@ public class BaseDAO<T> {
         }
     }
 
+
     protected DetachedCriteria criteriaReady() {
         return DetachedCriteria.forClass(entityClass);
+    }
+
+    public void save(T entity){
+        hibernateTemplate.save(entity);
     }
 
     public T get(Serializable id) {

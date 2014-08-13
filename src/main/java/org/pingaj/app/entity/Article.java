@@ -1,7 +1,7 @@
 package org.pingaj.app.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -10,38 +10,69 @@ import java.util.Date;
  * Summary:
  */
 @Entity
+@Table(name="Ok3w_Article")
 public class Article extends BaseEntity {
+
+    @Id
     @Column(name = "ID")
     private Integer id;
     @Column(name = "ChannelId")
     private Integer channelId;
+    @Column(name = "ClassId")
     private Integer classId;
+    @Column(name = "SortPath")
     private String sortPath;
+    @Column(name = "Title")
     private String title;
+    @Column(name = "TitleColor")
     private String titleColor;
+    @Column(name = "TitleURL")
     private String titleUrl;
+    @Column(name = "Keywords")
     private String keywords;
+    @Column(name = "Description")
     private String description;
+    @Column(name = "Content")
     private String content;
+    @Column(name = "Author")
     private String author;
+    @Column(name = "ComeFrom")
     private String comeFrom;
+    @Column(name = "AddTime")
     private Date addTime;
+    @Column(name = "Inputer")
     private String inputer;
+    @Column(name = "IsPic")
     private Integer isPic;
+    @Column(name = "PicFile")
     private String picFile;
+    @Column(name = "IsPass")
     private Integer isPass;
+    @Column(name = "IsTop")
     private Integer isTop;
+    @Column(name = "IsDelete")
     private Integer isDelete;
+    @Column(name = "IsCommend")
     private Integer isCommend;
-    private Integer isRemove;
+    @Column(name = "IsMove")
+    private Integer isMove;
+    @Column(name = "IsPlay")
     private Integer isPlay;
+    @Column(name = "IsIndexImg")
     private Integer isIndexImg;
+    @Column(name = "IsUserAdd")
     private Integer isUserAdd;
+    @Column(name = "GiveJifen")
     private Integer giveJifen;
+    @Column(name = "vUserGroupId")
     private Integer vUserGroupId;
+    @Column(name = "vUserMore")
     private Integer vUserMore;
+    @Column(name = "vUserJifen")
     private Integer vUserJifen;
+    @Column(name = "pMoodStr")
     private String pMoodStr;
+    @Column(name = "Hits")
     private Integer hits;
 
     public Integer getId() {
@@ -204,12 +235,12 @@ public class Article extends BaseEntity {
         this.isCommend = isCommend;
     }
 
-    public Integer getIsRemove() {
-        return isRemove;
+    public Integer getIsMove() {
+        return isMove;
     }
 
-    public void setIsRemove(Integer isRemove) {
-        this.isRemove = isRemove;
+    public void setIsMove(Integer isMove) {
+        this.isMove = isMove;
     }
 
     public Integer getIsPlay() {
