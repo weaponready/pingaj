@@ -16,7 +16,19 @@ public class Pagination {
     private int page;
     private int pages;
 
-    private List item;
+    private List items;
+
+    public Pagination(List items, int page, int size, int total) {
+        this.items = items;
+        this.page = page;
+        this.size = size;
+        this.total = total;
+        this.pages = total % size == 0 ? total / size : total / size + 1;
+    }
+
+    public Pagination() {
+
+    }
 
     public String getFirst() {
         return first;
@@ -82,11 +94,15 @@ public class Pagination {
         this.pages = pages;
     }
 
-    public List getItem() {
-        return item;
+    public List getItems() {
+        return items;
     }
 
-    public void setItem(List item) {
-        this.item = item;
+    public void setItems(List items) {
+        this.items = items;
+    }
+
+    public void ready(String url) {
+
     }
 }

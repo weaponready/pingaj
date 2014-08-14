@@ -93,6 +93,10 @@ public class JdbcTemplateTest extends AbstractTransactionalJUnit4SpringContextTe
 
     @Test
     public void testPagination(){
+        DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
+        criteria.add(Restrictions.eq("sortPath", "0,260,"));
+        List list = articleDAO.find(criteria);
+        Article article = articleDAO.get(Integer.parseInt("3638"));
     }
 
 }

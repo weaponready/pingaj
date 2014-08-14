@@ -74,9 +74,25 @@
 
     <tx:annotation-driven transaction-manager="transcationManager"/>
 
+
+    <bean id="config" class="org.pingaj.app.config.Config">
+        <property name="activityNewsPath" value="${path.news.activity}"/>
+        <property name="reportNewsPath" value="${path.news.report}"/>
+    </bean>
+
+
+    <bean id="dateConverter" class="org.pingaj.app.util.dozer.SimpleDateConverter">
+        <constructor-arg value="yyyy.MM.dd"/>
+    </bean>
+    
     <bean class="org.dozer.spring.DozerBeanMapperFactoryBean">
         <property name="mappingFiles">
             <value>classpath*:/dozer/*.xml</value>
+        </property>
+        <property name="customConvertersWithId">
+            <map>
+                <entry key="dateConverter" value-ref="dateConverter"/>
+            </map>
         </property>
     </bean>
 
