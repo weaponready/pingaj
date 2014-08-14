@@ -6,6 +6,7 @@ import org.hibernate.criterion.Restrictions;
 import org.junit.Test;
 import org.pingaj.app.entity.Article;
 import org.pingaj.app.entity.Guest;
+import org.pingaj.app.util.persistent.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.Rollback;
@@ -52,6 +53,7 @@ public class JdbcTemplateTest extends AbstractTransactionalJUnit4SpringContextTe
         DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
         criteria.add(Restrictions.like("titleUrl",".mp3", MatchMode.END));
         List list = articleDAO.find(criteria);
+        Page page = articleDAO.find(criteria, 10, 1);
         System.out.println(list.size());
     }
 
@@ -87,6 +89,10 @@ public class JdbcTemplateTest extends AbstractTransactionalJUnit4SpringContextTe
         List list = articleDAO.find(criteria);
 
 
+    }
+
+    @Test
+    public void testPagination(){
     }
 
 }

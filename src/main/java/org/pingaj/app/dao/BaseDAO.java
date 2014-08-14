@@ -1,6 +1,8 @@
 package org.pingaj.app.dao;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
+import org.pingaj.app.util.persistent.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
@@ -34,7 +36,7 @@ public class BaseDAO<T> {
         return DetachedCriteria.forClass(entityClass);
     }
 
-    public void save(T entity){
+    public void save(T entity) {
         hibernateTemplate.save(entity);
     }
 
@@ -57,6 +59,25 @@ public class BaseDAO<T> {
         }
         return null;
     }
+
+    public Page find(DetachedCriteria criteria, int size, int page) {
+        criteria.setProjection(Projections.rowCount());
+        int total = ((Long) this.hibernateTemplate.findByCriteria(criteria).get(0)).intValue();
+        criteria.setProjection(null);
+        int startIndex = getStartIndex(total,size, page);
+        List items = this.hibernateTemplate.findByCriteria(criteria, startIndex, size);
+        return new Page(total, items);
+    }
+
+    private int getStartIndex(int total, int size, int page) {
+        if (total <= 0) return 0;
+        int maxIndex = total % size == 0 ? total / size : total / size + 1;
+        if (page >= maxIndex) {
+            return (maxIndex - 1) * size;
+        }
+        return (page - 1) * size;
+    }
+
 
     public HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
