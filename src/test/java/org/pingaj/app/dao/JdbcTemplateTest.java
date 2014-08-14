@@ -4,6 +4,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Test;
+import org.pingaj.app.config.Config;
 import org.pingaj.app.entity.Article;
 import org.pingaj.app.entity.Guest;
 import org.pingaj.app.util.persistent.Page;
@@ -30,6 +31,8 @@ public class JdbcTemplateTest extends AbstractTransactionalJUnit4SpringContextTe
     private ArticleDAO articleDAO;
     @Autowired
     private GuestDAO guestDAO;
+    @Autowired
+    private Config config;
 
     @Test
     public void testQuery() {
@@ -94,9 +97,10 @@ public class JdbcTemplateTest extends AbstractTransactionalJUnit4SpringContextTe
     @Test
     public void testPagination(){
         DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
-        criteria.add(Restrictions.eq("sortPath", "0,260,"));
+        criteria.add(Restrictions.eq("sortPath", config.getInstrumentWorkPath()));
         List list = articleDAO.find(criteria);
-        Article article = articleDAO.get(Integer.parseInt("3638"));
+        //Article article = articleDAO.get(Integer.parseInt("3638"));
+
     }
 
 }

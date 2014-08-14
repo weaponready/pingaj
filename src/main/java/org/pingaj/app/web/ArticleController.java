@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Summary:
  */
 @Controller
-@RequestMapping("article")
+@RequestMapping("work")
 public class ArticleController extends BaseController {
+
+
+
 }

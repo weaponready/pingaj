@@ -1,10 +1,13 @@
 package org.pingaj.app.vo.response;
 
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
  * Created by Jamy on 14-8-14.
  */
+@XmlRootElement(name = "response")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Pagination {
 
     private String first;
@@ -16,6 +19,9 @@ public class Pagination {
     private int page;
     private int pages;
 
+    @XmlElementRefs({
+            @XmlElementRef(type=NewsTitle.class)
+    })
     private List items;
 
     public Pagination(List items, int page, int size, int total) {

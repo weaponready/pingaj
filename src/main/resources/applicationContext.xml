@@ -78,6 +78,10 @@
     <bean id="config" class="org.pingaj.app.config.Config">
         <property name="activityNewsPath" value="${path.news.activity}"/>
         <property name="reportNewsPath" value="${path.news.report}"/>
+        <property name="childrenWorkPath" value="${path.work.children}"/>
+        <property name="instrumentWorkPath" value="${path.work.instrument}"/>
+        <property name="classicWorkPath" value="${path.work.classic}"/>
+        <property name="latestWorkPath" value="${path.work.latest}"/>
     </bean>
 
 

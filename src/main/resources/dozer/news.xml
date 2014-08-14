@@ -13,7 +13,7 @@
         </field>
         <field custom-converter-id="dateConverter">
             <a>addTime</a>
-            <b>addTime</b>
+            <b>addtime</b>
         </field>
     </mapping>
 
@@ -26,7 +26,7 @@
         </field>
         <field custom-converter-id="dateConverter">
             <a>addTime</a>
-            <b>addTime</b>
+            <b>addtime</b>
         </field>
     </mapping>
 

@@ -1,16 +1,21 @@
 package org.pingaj.app.vo.response;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * Creator: JimmyLin
  * DateTime: 14-8-14 下午7:05
  * Summary: 新闻标题
  */
+@XmlRootElement(name = "newstitle")
+@XmlType(propOrder = {"id" , "position", "title", "addtime"})
 public class NewsTitle {
 
     private int id;
     private String position;
     private String title;
-    private String addTime;
+    private String addtime;
 
     public int getId() {
         return id;
@@ -29,12 +34,12 @@ public class NewsTitle {
         this.title = title;
     }
 
-    public String getAddTime() {
-        return addTime;
+    public String getAddtime() {
+        return addtime;
     }
 
-    public void setAddTime(String addTime) {
-        this.addTime = addTime;
+    public void setAddtime(String addtime) {
+        this.addtime = addtime;
     }
 
     public String getPosition() {

@@ -10,6 +10,11 @@ public class Config {
     private String activityNewsPath;
     private String reportNewsPath;
 
+    private String instrumentWorkPath;
+    private String childrenWorkPath;
+    private String classicWorkPath;
+    private String latestWorkPath;
+
     public String getActivityNewsPath() {
         return activityNewsPath;
     }
@@ -24,5 +29,37 @@ public class Config {
 
     public void setReportNewsPath(String reportNewsPath) {
         this.reportNewsPath = reportNewsPath;
+    }
+
+    public String getInstrumentWorkPath() {
+        return instrumentWorkPath;
+    }
+
+    public void setInstrumentWorkPath(String instrumentWorkPath) {
+        this.instrumentWorkPath = instrumentWorkPath;
+    }
+
+    public String getChildrenWorkPath() {
+        return childrenWorkPath;
+    }
+
+    public void setChildrenWorkPath(String childrenWorkPath) {
+        this.childrenWorkPath = childrenWorkPath;
+    }
+
+    public String getClassicWorkPath() {
+        return classicWorkPath;
+    }
+
+    public void setClassicWorkPath(String classicWorkPath) {
+        this.classicWorkPath = classicWorkPath;
+    }
+
+    public String getLatestWorkPath() {
+        return latestWorkPath;
+    }
+
+    public void setLatestWorkPath(String latestWorkPath) {
+        this.latestWorkPath = latestWorkPath;
     }
 }
