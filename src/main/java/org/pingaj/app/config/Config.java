@@ -7,6 +7,8 @@ package org.pingaj.app.config;
  */
 public class Config {
 
+    private String host;
+
     private String activityNewsPath;
     private String reportNewsPath;
 
@@ -61,5 +63,13 @@ public class Config {
 
     public void setLatestWorkPath(String latestWorkPath) {
         this.latestWorkPath = latestWorkPath;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
     }
 }

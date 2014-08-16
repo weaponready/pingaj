@@ -76,6 +76,7 @@
 
 
     <bean id="config" class="org.pingaj.app.config.Config">
+        <property name="host" value="${host.pinganjun}"/>
         <property name="activityNewsPath" value="${path.news.activity}"/>
         <property name="reportNewsPath" value="${path.news.report}"/>
         <property name="childrenWorkPath" value="${path.work.children}"/>

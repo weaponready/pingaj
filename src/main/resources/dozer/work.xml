@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+    <mapping>
+        <class-a>org.pingaj.app.entity.Item</class-a>
+        <class-b>org.pingaj.app.vo.response.WorkTitle</class-b>
+        <field>
+            <a>sortPath</a>
+            <b>position</b>
+        </field>
+        <field>
+            <a>sortName</a>
+            <b>title</b>
+        </field>
+    </mapping>
+    
+    <mapping>
+        <class-a>org.pingaj.app.entity.Article</class-a>
+        <class-b>org.pingaj.app.vo.response.WorkTitle</class-b>
+        <field>
+            <a>sortPath</a>
+            <b>position</b>
+        </field>
+    </mapping>
+    
+    <mapping>
+        <class-a>org.pingaj.app.entity.Article</class-a>
+        <class-b>org.pingaj.app.vo.response.WorkDetail</class-b>
+        <field>
+            <a>sortPath</a>
+            <b>position</b>
+        </field>
+        <field>
+            <a>titleUrl</a>
+            <b>url</b>
+        </field>
+    </mapping>
+
+</mappings>

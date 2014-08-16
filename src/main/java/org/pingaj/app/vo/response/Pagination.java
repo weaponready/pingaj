@@ -20,7 +20,8 @@ public class Pagination {
     private int pages;
 
     @XmlElementRefs({
-            @XmlElementRef(type=NewsTitle.class)
+            @XmlElementRef(type=NewsTitle.class),
+            @XmlElementRef(type=WorkTitle.class)
     })
     private List items;
 

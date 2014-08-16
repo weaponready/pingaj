@@ -4,6 +4,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.pingaj.app.util.persistent.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.io.Serializable;
@@ -22,6 +23,8 @@ public class BaseDAO<T> {
 
     @Autowired
     private HibernateTemplate hibernateTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public BaseDAO() {
         Type genType = getClass().getGenericSuperclass();
