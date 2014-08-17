@@ -52,7 +52,9 @@ public class NewsService extends BaseService {
     public NewsDetail getDetail(Integer id) {
         Article article = articleDAO.get(id);
         if (article != null) {
-            return dozer.map(article, NewsDetail.class);
+            NewsDetail detail = dozer.map(article, NewsDetail.class);
+            detail.setContent(StringUtils.replaceEach(detail.getContent(), new String[]{"src=\"upfiles"}, new String[]{"src=\""+config.getHost()+"upfiles"}));
+            return detail;
         }
         return null;
     }

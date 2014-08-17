@@ -27,7 +27,17 @@ public class ArticleDAO  extends BaseDAO<Article>{
 
     public List getByParent(String path) {
         DetachedCriteria criteria = criteriaReady();
+        criteria.add(Restrictions.ne("isDelete", 1));
         criteria.add(Restrictions.like("sortPath", path, MatchMode.START));
+        return find(criteria);
+    }
+
+
+    public List getByPath(String path) {
+        DetachedCriteria criteria = criteriaReady();
+        criteria.add(Restrictions.eq("sortPath", path));
+        criteria.add(Restrictions.ne("isDelete", 1));
+        criteria.addOrder(Order.desc("addTime"));
         return find(criteria);
     }
 }

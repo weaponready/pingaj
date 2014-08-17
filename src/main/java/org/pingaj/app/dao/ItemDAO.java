@@ -29,4 +29,11 @@ public class ItemDAO extends BaseDAO<Item> {
         criteria.add(Restrictions.ne("sortPath", path));
         return find(criteria);
     }
+
+    public Page getByParent(String path, PaginationRequest pagination){
+        DetachedCriteria criteria = criteriaReady();
+        criteria.add(Restrictions.like("sortPath", path, MatchMode.START));
+        criteria.add(Restrictions.ne("sortPath", path));
+        return find(criteria,pagination.getSize(),pagination.getPage());
+    }
 }
