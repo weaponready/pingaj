@@ -40,9 +40,9 @@ public class MoreController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/thesun/{type}")
-    public List<Sunshine> getSunshineTitle(@PathVariable("type") String type){
+    public Pagination getSunshineTitle(@PathVariable("type") String type){
         List<Sunshine> sunshines = leftService.getSunshineByType(type);
-        return sunshines;
+        return new Pagination(sunshines, 1, sunshines.size(),sunshines.size());
     }
 
     @ResponseBody

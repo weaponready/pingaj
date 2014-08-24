@@ -1,6 +1,7 @@
 package org.pingaj.app.web;
 
 import org.pingaj.app.service.AlbumService;
+import org.pingaj.app.vo.response.Pagination;
 import org.pingaj.app.vo.response.Photo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,9 @@ public class AlbumController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/{type}")
-    public List<Photo> fetch(@PathVariable("type") String type){
-        return albumService.fetchPictures(type);
+    public Pagination fetch(@PathVariable("type") String type){
+        List<Photo> photos = albumService.fetchPictures(type);
+        return new Pagination(photos, 1, photos.size(), photos.size());
     }
 
 

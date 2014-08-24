@@ -68,6 +68,8 @@ public class LeftService extends BaseService {
             path = config.getChapterOfSunshine();
         } else if (StringUtils.equals(type, "live")) {
             path = config.getLiveOfSunshine();
+        }else if(StringUtils.equals(type,"report")){
+            path = config.getReportOfSunshine();
         }
         List articles = articleDAO.getByPath(path);
         if (Collections3.isNotEmpty(articles)) {

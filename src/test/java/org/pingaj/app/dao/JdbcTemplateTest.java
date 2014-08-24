@@ -2,6 +2,7 @@ package org.pingaj.app.dao;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Test;
 import org.pingaj.app.config.Config;
@@ -97,8 +98,10 @@ public class JdbcTemplateTest extends AbstractTransactionalJUnit4SpringContextTe
     @Test
     public void testPagination(){
         DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
-        criteria.add(Restrictions.eq("sortPath", config.getInstrumentWorkPath()));
-        List list = articleDAO.getByParent("0,29,");
+        criteria.addOrder(Order.desc("addTime"));
+        criteria.add(Restrictions.eq("sortPath", "0,8,"));
+        criteria.add(Restrictions.ne("isDelete" ,1));
+        List list = articleDAO.getByParent("0,8,");
         Article article = articleDAO.get(Integer.parseInt("3449"));
 
 
