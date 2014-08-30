@@ -27,12 +27,45 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!-- 定义JSP文件的位置 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/"/>
-        <property name="suffix" value=".jsp"/>
+    <bean id="compositeExceptionResolver"
+          class="org.springframework.web.servlet.handler.HandlerExceptionResolverComposite">
+        <property name="order" value="0" />
+        <property name="exceptionResolvers">
+            <list>
+                <ref bean="exceptionHandlerExceptionResolver" />
+                <ref bean="restExceptionResolver" />
+            </list>
+        </property>
     </bean>
 
+    <bean id="restExceptionResolver"
+          class="cz.jirutka.spring.exhandler.RestHandlerExceptionResolverFactoryBean">
+        <property name="messageSource" ref="httpErrorMessageSource" />
+        <property name="defaultContentType" value="application/json" />
+        <property name="exceptionHandlers">
+            <map>
+                <entry key="org.springframework.dao.EmptyResultDataAccessException" value="404" />
+                <entry key="org.pingaj.app.exception.NotFoundException">
+                    <bean class="org.pingaj.app.exception.support.ResourceNotFoundExceptionHandler" />
+                </entry>
+                <entry key="org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException">
+                    <bean class="cz.jirutka.spring.exhandler.handlers.NoSuchRequestHandlingMethodExceptionHandler"/>
+                </entry>
+                <entry key="javax.validation.ConstraintViolationException">
+                    <bean class="cz.jirutka.spring.exhandler.handlers.MethodArgumentNotValidExceptionHandler"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="exceptionHandlerExceptionResolver"
+          class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" />
+
+    <bean id="httpErrorMessageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath*:messages.properties"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
 
     <!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL-->
     <mvc:default-servlet-handler/>

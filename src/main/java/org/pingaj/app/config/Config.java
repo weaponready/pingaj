@@ -7,6 +7,9 @@ package org.pingaj.app.config;
  */
 public class Config {
 
+    private String mp4Dir;
+    private String ffmpegPath;
+
     private String host;
 
     private String profileId;
@@ -174,5 +177,21 @@ public class Config {
 
     public void setGloriesPath(String gloriesPath) {
         this.gloriesPath = gloriesPath;
+    }
+
+    public String getMp4Dir() {
+        return mp4Dir;
+    }
+
+    public void setMp4Dir(String mp4Dir) {
+        this.mp4Dir = mp4Dir;
+    }
+
+    public String getFfmpegPath() {
+        return ffmpegPath;
+    }
+
+    public void setFfmpegPath(String ffmpegPath) {
+        this.ffmpegPath = ffmpegPath;
     }
 }

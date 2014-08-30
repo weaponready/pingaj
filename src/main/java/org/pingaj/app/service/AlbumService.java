@@ -3,6 +3,7 @@ package org.pingaj.app.service;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.pingaj.app.dao.ArticleDAO;
+import org.pingaj.app.exception.NotFoundException;
 import org.pingaj.app.util.Collections3;
 import org.pingaj.app.vo.response.Photo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,9 @@ public class AlbumService extends BaseService {
         }
         if (StringUtils.isNotEmpty(path)) {
             return fetch(path);
+        } else {
+            throw new NotFoundException(type + ":" + path);
         }
-        return null;
     }
 
 
@@ -46,8 +48,9 @@ public class AlbumService extends BaseService {
                 photos.add(photo);
             }
             return photos;
+        } else {
+            throw new NotFoundException(path);
         }
-        return null;
     }
 
 

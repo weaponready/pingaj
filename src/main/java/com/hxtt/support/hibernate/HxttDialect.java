@@ -236,7 +236,6 @@ public abstract class HxttDialect extends Dialect {
      *
      * @param sequenceName the name of the sequence
      * @return String The "nextval" select string.
-     * @throws MappingException If sequences are not supported.
      */
     public final String getSequenceNextValString(String sequenceName) {
         //SELECT NEXTVAL('SEQUENCENAME')
@@ -253,7 +252,6 @@ public abstract class HxttDialect extends Dialect {
      *
      * @param sequenceName the name of the sequence
      * @return The "nextval" fragment.
-     * @throws MappingException If sequences are not supported.
      */
     public final String getSelectSequenceNextValString(String sequenceName) {
         return  "nextval('" + sequenceName+"')";
@@ -271,7 +269,6 @@ public abstract class HxttDialect extends Dialect {
      *
      * @param sequenceName The name of the sequence
      * @return The sequence creation command
-     * @throws MappingException If sequences are not supported.
      */
     public final String getCreateSequenceString(String sequenceName) {
         // create sequence if not exists userID start WITH 100 increment by 2 maxvalue 2000 cache 5 cycle;
@@ -290,7 +287,6 @@ public abstract class HxttDialect extends Dialect {
      *
      * @param sequenceName The name of the sequence
      * @return The sequence drop commands
-     * @throws MappingException If sequences are not supported.
      */
     public final String getDropSequenceString(String sequenceName) {
         //drop sequence if exists userID;
@@ -336,7 +332,6 @@ public abstract class HxttDialect extends Dialect {
      * In general, dialects will override one or the other of this method and
      * {@link #getLimitString(String, int, int)}.
      *
-     * @param query The query to which to apply the limit.
      * @param hasOffset Is the query requesting an offset?
      * @return the modified SQL
      */
@@ -405,7 +400,6 @@ public abstract class HxttDialect extends Dialect {
      * @param column The PK column.
      * @param type The {@link java.sql.Types} type code.
      * @return The appropriate select command
-     * @throws MappingException If IDENTITY generation is not supported.
      */
     public final String getIdentitySelectString(String table, String column, int type){
         //return getIdentitySelectString();
@@ -489,7 +483,6 @@ public abstract class HxttDialect extends Dialect {
      * The syntax used during DDL to define a column as being an IDENTITY.
      *
      * @return The appropriate DDL fragment.
-     * @throws MappingException If IDENTITY generation is not supported.
      */
     public final String getIdentityColumnString() {
          return "auto_increment not null"; //starts with 1, implicitly

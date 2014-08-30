@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * Creator: JimmyLin
@@ -32,7 +33,7 @@ public class GuestController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "message", method = RequestMethod.POST)
-    public Response leaveMessage(HttpServletRequest request, GuestRequest message){
+    public Response leaveMessage(HttpServletRequest request, @Valid GuestRequest message){
         message.setIp(IpUtils.getIpAddr(request));
         guestService.leaveMessage(message);
         return new Response().success();

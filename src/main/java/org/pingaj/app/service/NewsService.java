@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.pingaj.app.dao.ArticleDAO;
 import org.pingaj.app.entity.Article;
+import org.pingaj.app.exception.NotFoundException;
 import org.pingaj.app.util.Collections3;
 import org.pingaj.app.util.persistent.Page;
 import org.pingaj.app.vo.request.PaginationRequest;
@@ -51,11 +52,9 @@ public class NewsService extends BaseService {
 
     public NewsDetail getDetail(Integer id) {
         Article article = articleDAO.get(id);
-        if (article != null) {
-            NewsDetail detail = dozer.map(article, NewsDetail.class);
-            detail.setContent(StringUtils.replaceEach(detail.getContent(), new String[]{"src=\"upfiles"}, new String[]{"src=\""+config.getHost()+"upfiles"}));
-            return detail;
-        }
-        return null;
+        if (article == null) throw new NotFoundException("news:" + id);
+        NewsDetail detail = dozer.map(article, NewsDetail.class);
+        detail.setContent(StringUtils.replaceEach(detail.getContent(), new String[]{"src=\"upfiles"}, new String[]{"src=\"" + config.getHost() + "upfiles"}));
+        return detail;
     }
 }

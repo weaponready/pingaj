@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.pingaj.app.dao.ArticleDAO;
 import org.pingaj.app.dao.ItemDAO;
 import org.pingaj.app.entity.Article;
+import org.pingaj.app.exception.NotFoundException;
 import org.pingaj.app.util.Collections3;
 import org.pingaj.app.util.persistent.Page;
 import org.pingaj.app.vo.response.*;
@@ -47,11 +48,12 @@ public class LeftService extends BaseService {
             }
             return new Pagination(titles, pagination.getPage(), pagination.getSize(), page.getTotal());
         }
-        return null;
+        throw new NotFoundException(pagination.getPosition());
     }
 
     public SoundDetail getSound(Integer id) {
         Article article = articleDAO.get(id);
+        if (article == null) throw new NotFoundException("article:" + id);
         SoundDetail title = dozer.map(article, SoundDetail.class);
         return title;
     }
@@ -68,7 +70,7 @@ public class LeftService extends BaseService {
             path = config.getChapterOfSunshine();
         } else if (StringUtils.equals(type, "live")) {
             path = config.getLiveOfSunshine();
-        }else if(StringUtils.equals(type,"report")){
+        } else if (StringUtils.equals(type, "report")) {
             path = config.getReportOfSunshine();
         }
         List articles = articleDAO.getByPath(path);
@@ -81,11 +83,12 @@ public class LeftService extends BaseService {
             }
             return sunshines;
         }
-        return null;
+        throw new NotFoundException(path);
     }
 
     public SunshineDetail getSunshine(Integer id) {
         SunshineDetail detail = dozer.map(articleDAO.get(id), SunshineDetail.class);
+        if (detail == null) throw new NotFoundException("sunshine:" + id);
         detail.setUrl(config.getHost() + detail.getUrl());
         detail.setContent(StringUtils.replaceEach(detail.getContent(), new String[]{"src=\"upfiles"}, new String[]{"src=\"" + config.getHost() + "upfiles"}));
         return detail;

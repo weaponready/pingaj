@@ -1,7 +1,10 @@
 package org.pingaj.app.dao;
 
+import com.google.common.collect.Lists;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
+import org.hibernate.internal.CriteriaImpl;
+import org.pingaj.app.util.Reflections;
 import org.pingaj.app.util.persistent.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -65,11 +68,25 @@ public class BaseDAO<T> {
 
     public Page find(DetachedCriteria criteria, int size, int page) {
         criteria.setProjection(Projections.rowCount());
+        List<CriteriaImpl.OrderEntry> orderEntries = removeOrders(criteria);
         int total = ((Long) this.hibernateTemplate.findByCriteria(criteria).get(0)).intValue();
         criteria.setProjection(null);
-        int startIndex = getStartIndex(total,size, page);
+        int startIndex = getStartIndex(total, size, page);
+        addOrders(criteria, orderEntries);
         List items = this.hibernateTemplate.findByCriteria(criteria, startIndex, size);
         return new Page(total, items);
+    }
+
+    private List<CriteriaImpl.OrderEntry> removeOrders(DetachedCriteria criteria) {
+        CriteriaImpl criteriaImpl = (CriteriaImpl) Reflections.getFieldValue(criteria, "impl");
+        List<CriteriaImpl.OrderEntry> orderEntries = (List<CriteriaImpl.OrderEntry>) Reflections.getFieldValue(criteriaImpl, "orderEntries");
+        Reflections.setFieldValue(criteriaImpl, "orderEntries", Lists.newArrayList());
+        return orderEntries;
+    }
+
+    private void addOrders(DetachedCriteria criteria, List<CriteriaImpl.OrderEntry> orderEntries) {
+        CriteriaImpl criteriaImpl = (CriteriaImpl) Reflections.getFieldValue(criteria, "impl");
+        Reflections.setFieldValue(criteriaImpl, "orderEntries", orderEntries);
     }
 
     private int getStartIndex(int total, int size, int page) {

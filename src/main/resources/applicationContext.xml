@@ -95,6 +95,8 @@
         <property name="publishOfSunshine" value="${path.sunshine.publish}"/>
         <property name="reportOfSunshine" value="${path.sunshine.report}" />
         <property name="soundOfDadePath" value="${path.dade.sound}" />
+        <property name="mp4Dir" value="${mp4.dir}"/>
+        <property name="ffmpegPath" value="${ffmpeg.path}"/>
     </bean>
 
 

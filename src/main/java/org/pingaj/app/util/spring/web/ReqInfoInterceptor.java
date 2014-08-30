@@ -1,6 +1,5 @@
 package org.pingaj.app.util.spring.web;
 
-import com.google.common.collect.Maps;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pingaj.app.util.net.IpUtils;
@@ -12,7 +11,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
-import java.util.Map;
 
 /**
  * Creator: JimmyLin
@@ -22,8 +20,7 @@ import java.util.Map;
 public class ReqInfoInterceptor extends HandlerInterceptorAdapter {
     private static final Logger LOG = LoggerFactory.getLogger(ReqInfoInterceptor.class);
 
-    private Map<HttpServletRequest, Long> reqs = Maps.newConcurrentMap();
-
+    private static final String ATTRIBUTE_TIME = "_attr_time";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -37,15 +34,13 @@ public class ReqInfoInterceptor extends HandlerInterceptorAdapter {
 
         String params = StringUtils.isNotEmpty(sb.toString()) ? sb.insert(0, "\n").toString() : "";
         LOG.debug("[{}] =>[{}] [{}]{}", IpUtils.getIpAddr(request), request.getMethod(), request.getRequestURL(), params);
-        reqs.put(request, System.currentTimeMillis());
+        request.setAttribute(ATTRIBUTE_TIME, System.currentTimeMillis());
         return super.preHandle(request, response, handler);
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         super.postHandle(request, response, handler, modelAndView);
-        long pre = reqs.get(request);
-        reqs.remove(request);
-        LOG.debug("[{}] =>[{}] [{}] cost[{}]ms", IpUtils.getIpAddr(request), request.getMethod(), request.getRequestURL(), (System.currentTimeMillis()-pre));
+        LOG.debug("[{}] =>[{}] [{}] cost[{}]ms", IpUtils.getIpAddr(request), request.getMethod(), request.getRequestURL(), (System.currentTimeMillis()-(Long)request.getAttribute(ATTRIBUTE_TIME)));
     }
 }
