@@ -1,0 +1,1 @@
+ffmpeg -i http://www.dadegroup.com/pinganjun/%E5%B0%91%E5%84%BF%E4%BD%9C%E5%93%81/1s%E7%AB%A5%E5%BF%83%E6%98%AF%E5%B0%8F%E9%B8%9F.flv -ar 22050 E://work/12345677.mp4
