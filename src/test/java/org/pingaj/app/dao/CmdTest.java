@@ -56,6 +56,7 @@ public class CmdTest {
     @Test
     public void test_url_encode() throws MalformedURLException, UnsupportedEncodingException {
         String raw = "http://www.dadegroup.com/pinganjun/少儿作品/1s童心是小鸟.flv";
+        System.out.println(new String(raw.getBytes(),"utf-8"));
         System.out.println(URLEncoder.encode(raw,"utf-8"));
         URL url = new URL(raw);
         String s1 = UriUtils.encodePath(raw, "utf-8");
