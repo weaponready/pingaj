@@ -40,4 +40,10 @@ public class ArticleDAO  extends BaseDAO<Article>{
         criteria.addOrder(Order.desc("addTime"));
         return find(criteria);
     }
+
+    public List getByClassId(Integer id) {
+        DetachedCriteria criteria = criteriaReady();
+        criteria.add(Restrictions.eq("classId", id));
+        return find(criteria);
+    }
 }

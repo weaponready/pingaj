@@ -20,7 +20,7 @@ public class Item extends BaseEntity {
     @Column(name = "ChannelID")
     private Integer channelId;
     @Column(name = "ParentID")
-    private Integer parenteId;
+    private Integer parentId;
     @Column(name = "SortPath")
     private String sortPath;
     @Column(name = "OrderID")
@@ -60,12 +60,12 @@ public class Item extends BaseEntity {
         this.channelId = channelId;
     }
 
-    public Integer getParenteId() {
-        return parenteId;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setParenteId(Integer parenteId) {
-        this.parenteId = parenteId;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public String getSortPath() {

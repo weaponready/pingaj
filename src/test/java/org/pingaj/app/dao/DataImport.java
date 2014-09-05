@@ -106,7 +106,7 @@ public class DataImport extends AbstractTransactionalJUnit4SpringContextTests {
                 item.setId(parseInt(e.getChildText("ID")));
                 item.setSortName(e.getChildText("SortName"));
                 item.setChannelId(parseInt(e.getChildText("ChannelID")));
-                item.setParenteId(parseInt(e.getChildText("ParentID")));
+                item.setParentId(parseInt(e.getChildText("ParentID")));
                 item.setSortPath(e.getChildText("SortPath"));
                 item.setOrderId(parseInt(e.getChildText("OrderID")));
                 item.setIsPic(parseInt(e.getChildText("IsPic")));

@@ -30,6 +30,12 @@ public class ItemDAO extends BaseDAO<Item> {
         return find(criteria);
     }
 
+    public Page getByParent(Integer id,  PaginationRequest pageRequest){
+        DetachedCriteria criteria = criteriaReady();
+        criteria.add(Restrictions.eq("parentId", id));
+        return  find(criteria,pageRequest.getSize(), pageRequest.getPage());
+    }
+
     public Page getByParent(String path, PaginationRequest pagination){
         DetachedCriteria criteria = criteriaReady();
         criteria.add(Restrictions.like("sortPath", path, MatchMode.START));

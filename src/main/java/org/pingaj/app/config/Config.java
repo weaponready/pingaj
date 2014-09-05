@@ -28,12 +28,7 @@ public class Config {
 
     private String soundOfDadePath;
 
-    private String reportOfSunshine;
-    private String chapterOfSunshine;
-    private String bandOfSunshine;
-    private String publishOfSunshine;
-    private String actorOfSunshine;
-    private String liveOfSunshine;
+    public Integer sunshine;
 
     public String getSoundOfDadePath() {
         return soundOfDadePath;
@@ -43,53 +38,6 @@ public class Config {
         this.soundOfDadePath = soundOfDadePath;
     }
 
-    public String getReportOfSunshine() {
-        return reportOfSunshine;
-    }
-
-    public void setReportOfSunshine(String reportOfSunshine) {
-        this.reportOfSunshine = reportOfSunshine;
-    }
-
-    public String getChapterOfSunshine() {
-        return chapterOfSunshine;
-    }
-
-    public void setChapterOfSunshine(String chapterOfSunshine) {
-        this.chapterOfSunshine = chapterOfSunshine;
-    }
-
-    public String getBandOfSunshine() {
-        return bandOfSunshine;
-    }
-
-    public void setBandOfSunshine(String bandOfSunshine) {
-        this.bandOfSunshine = bandOfSunshine;
-    }
-
-    public String getPublishOfSunshine() {
-        return publishOfSunshine;
-    }
-
-    public void setPublishOfSunshine(String publishOfSunshine) {
-        this.publishOfSunshine = publishOfSunshine;
-    }
-
-    public String getActorOfSunshine() {
-        return actorOfSunshine;
-    }
-
-    public void setActorOfSunshine(String actorOfSunshine) {
-        this.actorOfSunshine = actorOfSunshine;
-    }
-
-    public String getLiveOfSunshine() {
-        return liveOfSunshine;
-    }
-
-    public void setLiveOfSunshine(String liveOfSunshine) {
-        this.liveOfSunshine = liveOfSunshine;
-    }
 
     public String getStoryAlbumPath() {
         return storyAlbumPath;
@@ -193,5 +141,13 @@ public class Config {
 
     public void setFfmpegPath(String ffmpegPath) {
         this.ffmpegPath = ffmpegPath;
+    }
+
+    public Integer getSunshine(){
+        return this.sunshine;
+    }
+
+    public void setSunshine(Integer sunshine){
+        this.sunshine = sunshine;
     }
 }

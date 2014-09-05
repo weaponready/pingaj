@@ -67,6 +67,20 @@
             <b>position</b>
         </field>
     </mapping>
+    
+    
+    <mapping>
+        <class-a>org.pingaj.app.entity.Item</class-a>
+        <class-b>org.pingaj.app.vo.response.Sunshine</class-b>
+        <field>
+            <a>sortName</a>
+            <b>title</b>
+        </field>
+        <field>
+            <a>sortPath</a>
+            <b>position</b>
+        </field>
+    </mapping>
 
     <mapping>
         <class-a>org.pingaj.app.entity.Article</class-a>

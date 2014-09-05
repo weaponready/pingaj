@@ -4,7 +4,6 @@ import org.pingaj.app.service.LeftService;
 import org.pingaj.app.vo.request.PaginationRequest;
 import org.pingaj.app.vo.response.Pagination;
 import org.pingaj.app.vo.response.SoundDetail;
-import org.pingaj.app.vo.response.Sunshine;
 import org.pingaj.app.vo.response.SunshineDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,16 +38,17 @@ public class MoreController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/thesun/{type}")
-    public Pagination getSunshineTitle(@PathVariable("type") String type){
-        List<Sunshine> sunshines = leftService.getSunshineByType(type);
-        return new Pagination(sunshines, 1, sunshines.size(),sunshines.size());
+    @RequestMapping(value = "/thesun")
+    public Pagination getSunshineTitle(PaginationRequest page){
+        Pagination pagination = leftService.getSunshineList(page);
+        return pagination;
     }
 
     @ResponseBody
     @RequestMapping("/sunshine/{id}")
-    public SunshineDetail getDetail(@PathVariable("id") Integer id){
-        return leftService.getSunshine(id);
+    public Pagination getDetail(@PathVariable("id") Integer id){
+        List<SunshineDetail> detailList = leftService.getSunshine(id);
+        return new Pagination(detailList, 1, detailList.size(),detailList.size());
     }
 
 }

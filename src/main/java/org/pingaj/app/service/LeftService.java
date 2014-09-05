@@ -58,39 +58,48 @@ public class LeftService extends BaseService {
         return title;
     }
 
-    public List<Sunshine> getSunshineByType(String type) {
-        String path = "";
-        if (StringUtils.equals(type, "publish")) {
-            path = config.getPublishOfSunshine();
-        } else if (StringUtils.equals(type, "actor")) {
-            path = config.getActorOfSunshine();
-        } else if (StringUtils.equals(type, "band")) {
-            path = config.getBandOfSunshine();
-        } else if (StringUtils.equals(type, "chapter")) {
-            path = config.getChapterOfSunshine();
-        } else if (StringUtils.equals(type, "live")) {
-            path = config.getLiveOfSunshine();
-        } else if (StringUtils.equals(type, "report")) {
-            path = config.getReportOfSunshine();
-        }
-        List articles = articleDAO.getByPath(path);
+
+    public List<SunshineDetail> getSunshine(Integer id) {
+        List<Article> articles = articleDAO.getByClassId(id);
+        List<SunshineDetail> details  = Lists.newArrayList();
+
         if (Collections3.isNotEmpty(articles)) {
-            List<Sunshine> sunshines = Lists.newArrayList();
-            for (Object o : articles) {
-                Sunshine sunshine = dozer.map(o, Sunshine.class);
-                sunshine.setUrl(config.getHost() + sunshine.getUrl());
-                sunshines.add(sunshine);
+            for (Article article : articles) {
+                SunshineDetail detail = dozer.map(article, SunshineDetail.class);
+                if (detail == null) throw new NotFoundException("sunshine:" + id);
+                if(StringUtils.isNotEmpty(article.getTitleUrl())){
+                    detail.setUrl(article.getTitleUrl());
+                }else if(StringUtils.isNotEmpty(article.getPicFile())){
+                    detail.setUrl(config.getHost() + detail.getUrl());
+                }
+                detail.setContent(StringUtils.replaceEach(detail.getContent(), new String[]{"src=\"upfiles"}, new String[]{"src=\"" + config.getHost() + "upfiles"}));
+                details.add(detail);
             }
-            return sunshines;
         }
-        throw new NotFoundException(path);
+        return details;
     }
 
-    public SunshineDetail getSunshine(Integer id) {
-        SunshineDetail detail = dozer.map(articleDAO.get(id), SunshineDetail.class);
-        if (detail == null) throw new NotFoundException("sunshine:" + id);
-        detail.setUrl(config.getHost() + detail.getUrl());
-        detail.setContent(StringUtils.replaceEach(detail.getContent(), new String[]{"src=\"upfiles"}, new String[]{"src=\"" + config.getHost() + "upfiles"}));
-        return detail;
+
+    public Pagination getSunshineList(PaginationRequest pagination) {
+        Page page = itemDAO.getByParent(config.getSunshine(), pagination);
+        if (Collections3.isNotEmpty(page.getItems())) {
+            List<Sunshine> titles = Lists.newArrayList();
+            for (Object o : page.getItems()) {
+                Sunshine parentTitle = dozer.map(o, Sunshine.class);
+                List children = itemDAO.getByParent(parentTitle.getPosition());
+
+                if (Collections3.isNotEmpty(children)) {
+                    List<Sunshine> subTitles = Lists.newArrayList();
+                    for (Object i : children) {
+                        Sunshine child = dozer.map(i, Sunshine.class);
+                        subTitles.add(child);
+                    }
+                    parentTitle.setChildren(subTitles);
+                }
+                titles.add(parentTitle);
+            }
+            return new Pagination(titles, pagination.getPage(), pagination.getSize(), page.getTotal());
+        }
+        throw new NotFoundException(pagination.getPosition());
     }
 }

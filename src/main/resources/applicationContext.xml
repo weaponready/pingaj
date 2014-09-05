@@ -88,12 +88,8 @@
         <property name="exchangeAlbumPath" value="${path.album.exchange}" />
         <property name="storyAlbumPath" value="${path.album.story}" />
 
-        <property name="actorOfSunshine" value="${path.sushine.actor}"/>
-        <property name="bandOfSunshine" value="${path.sunshine.band}"/>
-        <property name="chapterOfSunshine" value="${path.sunshine.chapter}"/>
-        <property name="liveOfSunshine" value="${path.sunshine.live}"/>
-        <property name="publishOfSunshine" value="${path.sunshine.publish}"/>
-        <property name="reportOfSunshine" value="${path.sunshine.report}" />
+        <property name="sunshine" value="31"/>
+
         <property name="soundOfDadePath" value="${path.dade.sound}" />
         <property name="mp4Dir" value="${mp4.dir}"/>
         <property name="ffmpegPath" value="${ffmpeg.path}"/>
