@@ -44,6 +44,7 @@ public class ArticleDAO  extends BaseDAO<Article>{
     public List getByClassId(Integer id) {
         DetachedCriteria criteria = criteriaReady();
         criteria.add(Restrictions.eq("classId", id));
+        criteria.add(Restrictions.ne("isDelete", 1));
         return find(criteria);
     }
 }

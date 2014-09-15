@@ -177,4 +177,8 @@ public class Guest extends BaseEntity {
     public void setAdAsk(String adAsk) {
         this.adAsk = adAsk;
     }
+
+    public Date getAddTime() {
+        return addTime;
+    }
 }

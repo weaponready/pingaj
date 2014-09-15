@@ -29,6 +29,6 @@ public class GuestService {
         guest.setIsPass(0);
         guest.setTableId(0);
         guest.setTypeId(100);
-        guestDAO.save(guest);
+        guestDAO.persistent(guest);
     }
 }

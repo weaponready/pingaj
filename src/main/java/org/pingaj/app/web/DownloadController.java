@@ -13,14 +13,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.UriUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by Jamy on 14-8-29.
@@ -32,6 +35,21 @@ public class DownloadController {
 
     @Autowired
     private Config config;
+
+
+    @RequestMapping("play")
+    public String play(@RequestParam(value = "url", required = false) String url, Model model){
+        if(StringUtils.isNotEmpty(url)){
+            try {
+                url = UriUtils.encodePath(url, "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                LOG.error(e.getMessage());
+            }
+        }
+        model.addAttribute("url", url);
+        return "play";
+    }
+
 
     @RequestMapping("/d")
     public void download(@RequestParam("f") String url, HttpServletResponse response, @RequestHeader(value = "Range", required = false) String range) {
