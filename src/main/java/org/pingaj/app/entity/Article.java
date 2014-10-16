@@ -314,4 +314,22 @@ public class Article extends BaseEntity {
     public void setHits(Integer hits) {
         this.hits = hits;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "title='" + title + '\'' +
+                ", addTime=" + addTime +
+                ", isPic=" + isPic +
+                ", isPass=" + isPass +
+                ", isTop=" + isTop +
+                ", isDelete=" + isDelete +
+                ", isCommend=" + isCommend +
+                ", isMove=" + isMove +
+                ", isPlay=" + isPlay +
+                ", isIndexImg=" + isIndexImg +
+                ", isUserAdd=" + isUserAdd +
+                ", vUserMore=" + vUserMore +
+                '}';
+    }
 }

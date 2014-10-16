@@ -6,6 +6,7 @@ import org.pingaj.app.vo.response.Pagination;
 import org.pingaj.app.vo.response.WorkDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,10 +32,11 @@ public class ArticleController extends BaseController {
         return pagination;
     }
 
-    @ResponseBody
     @RequestMapping(value = "detail/{id}")
-    public WorkDetail detail(@PathVariable("id") Integer id){
-        return worksService.getDetail(id);
+    public String detail(@PathVariable("id") Integer id, Model model){
+        WorkDetail detail = worksService.getDetail(id);
+        model.addAttribute("work", detail);
+        return "work";
     }
 
 }

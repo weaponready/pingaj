@@ -36,7 +36,7 @@ public class NewsService extends BaseService {
             path = config.getReportNewsPath();
         }
         if (StringUtils.isNotEmpty(path)) {
-            Page page = articleDAO.getByPath(config.getActivityNewsPath(), pagination);
+            Page page = articleDAO.getByPath(path, pagination);
             if (Collections3.isNotEmpty(page.getItems())) {
                 List<NewsTitle> titles = Lists.newArrayList();
                 for (Object o : page.getItems()) {

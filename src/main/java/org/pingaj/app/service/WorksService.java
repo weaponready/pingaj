@@ -40,6 +40,15 @@ public class WorksService extends BaseService {
             path = config.getClassicWorkPath();
         } else if (StringUtils.equals("latest", type)) {
             path = config.getLatestWorkPath();
+            List latest = articleDAO.getByParent(path);
+            if (Collections3.isNotEmpty(latest)) {
+                List<WorkTitle> details = Lists.newArrayList();
+                for (Object o : latest) {
+                    details.add(dozer.map(o, WorkTitle.class));
+                }
+                return new Pagination(details, 1, latest.size(), latest.size());
+            }
+
         }
         Page page = itemDAO.search(path, pagination);
         if (Collections3.isNotEmpty(page.getItems())) {

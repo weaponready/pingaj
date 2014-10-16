@@ -6,6 +6,7 @@ import org.pingaj.app.vo.response.NewsDetail;
 import org.pingaj.app.vo.response.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,9 +32,10 @@ public class NewsController extends BaseController {
         return response;
     }
 
-    @ResponseBody
     @RequestMapping("detail/{id}")
-    public NewsDetail detail(@PathVariable("id") Integer id){
-        return newsService.getDetail(id);
+    public String detail(@PathVariable("id") Integer id, Model model){
+        NewsDetail detail = newsService.getDetail(id);
+        model.addAttribute("news", detail);
+        return "news";
     }
 }

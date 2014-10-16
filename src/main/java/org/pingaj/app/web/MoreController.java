@@ -3,10 +3,10 @@ package org.pingaj.app.web;
 import org.pingaj.app.service.LeftService;
 import org.pingaj.app.vo.request.PaginationRequest;
 import org.pingaj.app.vo.response.Pagination;
-import org.pingaj.app.vo.response.SoundDetail;
 import org.pingaj.app.vo.response.SunshineDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,29 +26,29 @@ public class MoreController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "sound")
-    public Pagination soundOfDade(PaginationRequest page, HttpServletRequest request){
+    public Pagination soundOfDade(PaginationRequest page, HttpServletRequest request) {
         Pagination pagination = leftService.getSoundTitle(page);
         return pagination;
     }
 
-    @ResponseBody
     @RequestMapping(value = "/sound/{id}")
-    public SoundDetail getSoundDetail(@PathVariable("id") Integer id){
-        return leftService.getSound(id);
+    public String getSoundDetail(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("sound", leftService.getSound(id));
+        return "sound";
     }
 
     @ResponseBody
     @RequestMapping(value = "/thesun")
-    public Pagination getSunshineTitle(PaginationRequest page){
+    public Pagination getSunshineTitle(PaginationRequest page) {
         Pagination pagination = leftService.getSunshineList(page);
         return pagination;
     }
 
-    @ResponseBody
     @RequestMapping("/sunshine/{id}")
-    public Pagination getDetail(@PathVariable("id") Integer id){
+    public String getDetail(@PathVariable("id") Integer id, Model model) {
         List<SunshineDetail> detailList = leftService.getSunshine(id);
-        return new Pagination(detailList, 1, detailList.size(),detailList.size());
+        model.addAttribute("list", new Pagination(detailList, 1, detailList.size(), detailList.size()));
+        return "sunshine";
     }
 
 }

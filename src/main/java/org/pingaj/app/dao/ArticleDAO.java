@@ -29,6 +29,7 @@ public class ArticleDAO  extends BaseDAO<Article>{
         DetachedCriteria criteria = criteriaReady();
         criteria.add(Restrictions.ne("isDelete", 1));
         criteria.add(Restrictions.like("sortPath", path, MatchMode.START));
+        criteria.addOrder(Order.desc("addTime"));
         return find(criteria);
     }
 

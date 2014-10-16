@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,7 @@ public class DownloadController {
 
 
     @RequestMapping("play")
-    public String play(@RequestParam(value = "url", required = false) String url, Model model){
+    public String play(@RequestParam(value = "url", required = false) String url, Model model, UriComponentsBuilder builder){
         if(StringUtils.isNotEmpty(url)){
             try {
                 url = UriUtils.encodePath(url, "utf-8");
@@ -46,8 +47,10 @@ public class DownloadController {
                 LOG.error(e.getMessage());
             }
         }
+        String ctx = builder.build().toString();
         model.addAttribute("url", url);
-        return "play";
+        model.addAttribute("ctx", ctx);
+        return "sound";
     }
 
 

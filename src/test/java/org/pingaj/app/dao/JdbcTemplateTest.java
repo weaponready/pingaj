@@ -15,6 +15,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -102,8 +103,14 @@ public class JdbcTemplateTest extends AbstractTransactionalJUnit4SpringContextTe
         criteria.add(Restrictions.eq("sortPath", "0,8,"));
         criteria.add(Restrictions.ne("isDelete" ,1));
         List list = articleDAO.getByParent("0,8,");
-        Article article = articleDAO.get(Integer.parseInt("3449"));
 
+        //Article article = articleDAO.get(Integer.parseInt("3449"));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for(Object a: list){
+            Article article = (Article) a;
+            //System.out.println(sdf.format(article.getAddTime())+" "+ article.getTitle());
+            System.out.println(article.toString());
+        }
 
     }
 
