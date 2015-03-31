@@ -9,12 +9,13 @@ import javax.xml.bind.annotation.XmlType;
  * Summary: 新闻详情
  */
 @XmlRootElement(name = "newsdetail")
-@XmlType(propOrder = {"id", "position", "title", "content", "author", "addtime"})
+@XmlType(propOrder = {"id", "position", "title", "url", "content", "author", "addtime"})
 public class NewsDetail {
 
     private int id;
     private String position;
     private String title;
+    private String url;
     private String content;
     private String author;
     private String addtime;
@@ -65,5 +66,13 @@ public class NewsDetail {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

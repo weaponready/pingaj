@@ -24,6 +24,10 @@
             <a>sortPath</a>
             <b>position</b>
         </field>
+        <field>
+            <a>titleUrl</a>
+            <b>url</b>
+        </field>
         <field custom-converter-id="dateConverter">
             <a>addTime</a>
             <b>addtime</b>

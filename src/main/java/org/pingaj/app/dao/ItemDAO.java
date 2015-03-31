@@ -2,6 +2,7 @@ package org.pingaj.app.dao;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.pingaj.app.entity.Item;
 import org.pingaj.app.util.persistent.Page;
@@ -40,6 +41,7 @@ public class ItemDAO extends BaseDAO<Item> {
         DetachedCriteria criteria = criteriaReady();
         criteria.add(Restrictions.like("sortPath", path, MatchMode.START));
         criteria.add(Restrictions.ne("sortPath", path));
+        criteria.addOrder(Order.desc("orderId"));
         return find(criteria,pagination.getSize(),pagination.getPage());
     }
 }

@@ -5,6 +5,7 @@ import org.pingaj.app.service.NewsService;
 import org.pingaj.app.vo.response.NewsDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,5 +27,10 @@ public class ProfileController extends BaseController {
         return newsService.getDetail(Integer.parseInt(config.getProfileId()));
     }
 
-
+    @RequestMapping("/page")
+    public String aboutPinganjun(Model model){
+        NewsDetail detail = newsService.getDetail(Integer.parseInt(config.getProfileId()));
+        model.addAttribute("profile", detail);
+        return "about";
+    }
 }

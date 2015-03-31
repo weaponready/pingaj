@@ -8,8 +8,8 @@ import org.pingaj.app.entity.Article;
 import org.pingaj.app.exception.NotFoundException;
 import org.pingaj.app.util.Collections3;
 import org.pingaj.app.util.persistent.Page;
-import org.pingaj.app.vo.response.*;
 import org.pingaj.app.vo.request.PaginationRequest;
+import org.pingaj.app.vo.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +55,7 @@ public class LeftService extends BaseService {
         Article article = articleDAO.get(id);
         if (article == null) throw new NotFoundException("article:" + id);
         SoundDetail title = dozer.map(article, SoundDetail.class);
+        title.setContent(StringUtils.replaceEach(title.getContent(), new String[]{"src=\"upfiles"}, new String[]{"src=\"" + config.getHost() + "upfiles"}));
         return title;
     }
 
@@ -65,6 +66,7 @@ public class LeftService extends BaseService {
 
         if (Collections3.isNotEmpty(articles)) {
             for (Article article : articles) {
+
                 SunshineDetail detail = dozer.map(article, SunshineDetail.class);
                 if (detail == null) throw new NotFoundException("sunshine:" + id);
                 if(StringUtils.isNotEmpty(article.getTitleUrl())){
